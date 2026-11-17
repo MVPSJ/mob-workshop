@@ -9,7 +9,7 @@
 :root{
   --bg:#ECEFE8; --panel:#F8FAF5; --sunk:#E2E7DE; --ink:#1E2820; --muted:#5B685E; --line:#CDD5C9;
   --accent:#2E7A3A; --accent-ink:#FFFFFF;
-  --ev:#C9741F; --fight:#B8423A; --body:#23806F; --cmd:#6550AD; --friend:#2F6EA8; --blk-ink:#FFFFFF;
+  --ev:#C9741F; --fight:#B8423A; --body:#23806F; --cmd:#6550AD; --friend:#2F6EA8; --flow:#5F6B66; --blk-ink:#FFFFFF;
   --field:#FFFFFF; --field-ink:#1E2820;
   --bad:#B8423A; --warn:#A86A00; --ok:#2E7A3A; --info:#4A6380;
   --mark:#FFE7A8;
@@ -20,13 +20,13 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#131813; --panel:#1B221C; --sunk:#232C24; --ink:#E3EAE2; --muted:#9AA79C; --line:#323D33;
   --accent:#5DB46A; --accent-ink:#0F1A10;
-  --ev:#D9862F; --fight:#CF5A4F; --body:#2E9A86; --cmd:#7F6AC8; --friend:#4A88C4; --blk-ink:#FFFFFF;
+  --ev:#D9862F; --fight:#CF5A4F; --body:#2E9A86; --cmd:#7F6AC8; --friend:#4A88C4; --flow:#7E8A85; --blk-ink:#FFFFFF;
   --field:#0F140F; --field-ink:#E3EAE2;
   --bad:#E07A70; --warn:#E0A940; --ok:#6CC479; --info:#8FAACB; --mark:#5A4A12; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#131813; --panel:#1B221C; --sunk:#232C24; --ink:#E3EAE2; --muted:#9AA79C; --line:#323D33;
   --accent:#5DB46A; --accent-ink:#0F1A10;
-  --ev:#D9862F; --fight:#CF5A4F; --body:#2E9A86; --cmd:#7F6AC8; --friend:#4A88C4; --blk-ink:#FFFFFF;
+  --ev:#D9862F; --fight:#CF5A4F; --body:#2E9A86; --cmd:#7F6AC8; --friend:#4A88C4; --flow:#7E8A85; --blk-ink:#FFFFFF;
   --field:#0F140F; --field-ink:#E3EAE2;
   --bad:#E07A70; --warn:#E0A940; --ok:#6CC479; --info:#8FAACB; --mark:#5A4A12; color-scheme:dark}
 *{box-sizing:border-box}
@@ -66,7 +66,7 @@ button,input,select{font:inherit;color:inherit}
 .pitem{border:0;cursor:grab;text-align:left;color:var(--blk-ink);font-weight:500;font-size:14px;padding:6px 10px;border-radius:7px;line-height:1.35;position:relative;max-width:100%}
 .pitem:hover{filter:brightness(1.1)}
 .pitem.ev{background:var(--ev);border-radius:14px 14px 7px 7px}
-.pitem.fight{background:var(--fight)}.pitem.body{background:var(--body)}.pitem.cmd{background:var(--cmd)}.pitem.friend{background:var(--friend)}
+.pitem.fight{background:var(--fight)}.pitem.body{background:var(--body)}.pitem.cmd{background:var(--cmd)}.pitem.friend{background:var(--friend)}.pitem.flow{background:var(--flow)}
 .beta{display:inline-block;font-size:11px;font-weight:700;line-height:1;padding:3px 6px;border-radius:999px;background:rgba(255,255,255,.88);color:#7A4A00;vertical-align:1px;margin-left:4px;white-space:nowrap}
 .target-hint{font-size:12px;color:var(--muted);margin:-2px 0 10px;padding:6px 8px;background:var(--sunk);border-radius:8px}
 .target-hint b{color:var(--ink)}
@@ -81,7 +81,7 @@ button,input,select{font:inherit;color:inherit}
 .hat{background:var(--ev);color:var(--blk-ink);border-radius:18px 18px 6px 6px;padding:10px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;cursor:pointer;font:700 16px/1.4 var(--f-display)}
 .body-list{margin-left:14px;border-left:10px solid var(--ev);padding:6px 0 6px 0;display:flex;flex-direction:column;gap:4px;border-radius:0 0 0 8px}
 .blk{color:var(--blk-ink);border-radius:7px;padding:7px 8px 7px 12px;display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-weight:500;cursor:grab}
-.blk.fight{background:var(--fight)}.blk.body{background:var(--body)}.blk.cmd{background:var(--cmd)}.blk.friend{background:var(--friend)}
+.blk.fight{background:var(--fight)}.blk.body{background:var(--body)}.blk.cmd{background:var(--cmd)}.blk.friend{background:var(--friend)}.blk.flow{background:var(--flow);border-left:6px dashed rgba(255,255,255,.55)}
 .blk.dim{opacity:.55}
 .empty-drop{margin:2px 0;padding:10px 12px;border:2px dashed var(--line);border-radius:8px;color:var(--muted);font-size:13px}
 .blk input,.blk select,.hat input,.hat select{background:var(--field);color:var(--field-ink);border:0;border-radius:999px;padding:2px 10px;font-weight:600;font-size:14px;max-width:100%}
@@ -227,8 +227,14 @@ https://github.com/nodeca/pako/blob/main/LICENSE
 const VANILLA = {};
 const VANILLA_TAG = 'v1.26.20.26';
 // 每次修改都在最上面加一筆，TOOL_VERSION 跟著改
-const TOOL_VERSION = 'v1.22';
+const TOOL_VERSION = 'v1.28';
 const CHANGELOG = [
+  ['v1.28','2026/10/24','影分身火球雞範例改成老師實測成功的組合；「等待」「衝向最近的玩家」「分身出生時」「閃電打在最近的玩家」實測成功，拿掉測試中。'],
+  ['v1.27','2026/10/24','新增「衝向最近的玩家」積木（測試中）：用腳本給生物一股往玩家的推力；影分身火球雞範例加上本尊喊「雷切必中之術！」→ 衝向玩家 → 0.5 秒後打雷。'],
+  ['v1.26','2026/10/24','修正「等待」沒有作用：腳本把下一段招式的名稱切錯（空白被當成字母 s），導致等待後的積木都沒執行。'],
+  ['v1.25','2026/10/24','新增「順序」分類的「等待 N 秒，再做下面的積木」（測試中），讓招式有先後順序（用腳本計時，多個等待互不干擾）；影分身火球雞範例加上 2 秒後本尊喊「雷切！」並用閃電打玩家。'],
+  ['v1.24','2026/10/24','「召喚閃電」可以選打在自己、最近的玩家或 16 格內所有玩家（打在玩家身上為測試中）。'],
+  ['v1.23','2026/10/23','新增「分身出生時」事件（測試中）：分身只執行這裡的積木，不會再執行本尊的任何事件（修正分身被火球炸到後又喊「影分身之術！」）；拿掉「本尊和分身」選單，舊作品會自動搬到新事件；影分身火球雞範例改用新事件。'],
   ['v1.22','2026/10/23','工坊名稱改為「Adam麥塊生物行為工坊」（標題、分頁名稱、回報、包的說明）。'],
   ['v1.21','2026/10/23','接上老師的 Google 表單「麥塊生物行為工坊 回報」；新增 GitHub 專用版：不內嵌 Mojang 原版檔，打開時才從官方 GitHub 下載（下載過會記在瀏覽器裡）。'],
   ['v1.20','2026/10/23','回報新增 Google 表單：從學校 HFS 打開時存到老師電腦；從 GitHub 等其他地方打開（或 HFS 存不進去）時，送到老師的 Google 表單。'],
@@ -297,7 +303,8 @@ const EVENTS = {
   saddled:      { label: ['裝上鞍時'], p: [], unique: true, beta: true, tip: '只有豬、馬、驢、騾、駱駝、熾足獸這類可以裝鞍的生物。' },
   unsaddled:    { label: ['拿下鞍時'], p: [], unique: true, beta: true },
   leashed:      { label: ['被拴繩拴住時'], p: [], unique: true, beta: true, tip: '不能拴的生物會自動變成可以拴。' },
-  unleashed:    { label: ['解開拴繩時'], p: [], unique: true, beta: true }
+  unleashed:    { label: ['解開拴繩時'], p: [], unique: true, beta: true },
+  clone_born:   { label: ['分身出生時'], p: [], unique: true, tip: '只有「影分身之術」變出來的分身會執行這裡的積木；分身不會執行其他任何事件，本尊也不會執行這裡。' }
 };
 const ACTIONS = {
   angry_attack: { cat: 'fight', label: ['生氣', '#s', '秒並攻擊玩家，傷害', '#d'], p: [{ k: 's', t: 'num', d: 10, min: 1, max: 120, step: 1 }, { k: 'd', t: 'num', d: 2, min: 0, max: 20, step: 1 }] },
@@ -307,6 +314,7 @@ const ACTIONS = {
   shoot:        { cat: 'fight', label: ['朝玩家射出', '#pj'], // 2026/10/21 豬射雪球實測成功（需生存模式）
                 p: [{ k: 'pj', t: 'sel', d: 'minecraft:arrow', o: PROJECTILES }] },
   delayed_shoot:{ cat: 'fight', label: ['', '#t', '秒後開始朝玩家射出', '#pj'], p: [{ k: 't', t: 'num', d: 1, min: 0.5, max: 30, step: 0.5 }, { k: 'pj', t: 'sel', d: 'minecraft:fireball', o: PROJECTILES }] },
+  dash:         { cat: 'fight', label: ['衝向最近的玩家，力道', '#s'], p: [{ k: 's', t: 'num', d: 1, min: 0.5, max: 3, step: 0.5 }] },
   clone:        { cat: 'fight', notStart: true, label: ['影分身之術：變出', '#n', '個分身'], p: [{ k: 'n', t: 'num', d: 4, min: 1, max: 8, step: 1 }] },
   fearless:     { cat: 'body', label: ['變得勇敢（被打不逃跑）'], p: [], startOnly: true },
   panic:        { cat: 'body', beta: true, label: ['被打會逃跑'], p: [] },
@@ -332,8 +340,9 @@ const ACTIONS = {
   open_doors:   { cat: 'friend', beta: true, label: ['會開門'], p: [], startOnly: true },
   trade:        { cat: 'friend', beta: true, label: ['可以跟玩家交易'], p: [], startOnly: true },
   carry_chest:  { cat: 'friend', beta: true, label: ['可以背箱子裝東西'], p: [], startOnly: true },
+  wait:         { cat: 'flow', label: ['等待', '#t', '秒，再做下面的積木'], p: [{ k: 't', t: 'num', d: 1, min: 0.5, max: 60, step: 0.5 }] },
   say:          { cat: 'cmd', label: ['說', '#text', '顯示在', '#where'], p: [{ k: 'text', t: 'text', d: '哞！別惹我！' }, { k: 'where', t: 'sel', d: 'chat', o: [['chat','聊天欄'],['head','自己頭上 3 秒']] }] },
-  lightning:    { cat: 'cmd', label: ['在自己身上召喚閃電'], p: [] },
+  lightning:    { cat: 'cmd', label: ['在', '#tg', '身上召喚閃電'], p: [{ k: 'tg', t: 'sel', d: 'self', o: [['self','自己'],['player','最近的玩家'],['all','16 格內所有玩家（測試中）']] }] },
   effect:       { cat: 'cmd', label: ['給', '#r', '格內玩家', '#e', '效果', '#s', '秒'], p: [{ k: 'r', t: 'num', d: 6, min: 1, max: 30, step: 1 }, { k: 'e', t: 'sel', d: 'speed', o: EFFECTS }, { k: 's', t: 'num', d: 10, min: 1, max: 120, step: 1 }] },
   summon:       { cat: 'cmd', label: ['召喚一隻', '#m'], p: [{ k: 'm', t: 'sel', d: 'chicken', o: SUMMONS }] },
   give:         { cat: 'cmd', label: ['給最近的玩家', '#i'], p: [{ k: 'i', t: 'sel', d: 'diamond', o: GIVE_ITEMS }] },
@@ -415,12 +424,21 @@ function generate(project, VANILLA) {
   const calmFor = [];
   let timerUsed = false, phaseUsed = false, nearUsed = false;
   const info = mobInfo(VANILLA, mob);
+  // 分身出生事件的開頭：標記「已分身」「是分身」→ 跑原版出生流程（長大、外觀等）
+  const spawnedOrig = EV['minecraft:entity_spawned'] ? clone(EV['minecraft:entity_spawned']) : null;
+  const bornHead = () => {
+    const h = [{ set_property: { 'edu:split': true, 'edu:clone': true } }];
+    if (spawnedOrig) h.push(clone(spawnedOrig));
+    return h;
+  };
+  // 有沒有用到影分身（分身會被標記 edu:clone，只執行「分身出生時」，其他事件全部擋掉）
+  const cloneUsed = project.events.some(e => e.type !== 'start' && e.type !== 'clone_born' && e.actions.some(a => a.type === 'clone'));
 
   project.events.forEach((ev, i) => {
     const evDef = EVENTS[ev.type]; if (!evDef) return;
     const isStart = ev.type === 'start';
     const grp = `edu:g${i}_${ev.type}`, evName = `edu:e${i}_${ev.type}`;
-    // 依「誰」分成本尊與分身兩份：tag 用來讓兩份的群組、事件名稱不重複
+    const isCloneBorn = ev.type === 'clone_born';
     const build = (list, tag) => {
       const comps = {}, cmds = [], extraAdd = [];
       let hasReset = false, hasAngry = false, fuseGrp = null;
@@ -476,7 +494,7 @@ function generate(project, VANILLA) {
             // 影分身：用 /summon 叫出同種生物，並指定生成事件，讓分身一出生就標記「已分身」，不會再分身
             const n = v('n');
             const spots = ['~1 ~ ~', '~-1 ~ ~', '~ ~ ~1', '~ ~ ~-1', '~1 ~ ~1', '~-1 ~ ~-1', '~1 ~ ~-1', '~-1 ~ ~1'];
-            const cloneEv = `edu:clone_born${tag}`;
+            const cloneEv = 'edu:clone_born';
             // 召喚指令放在獨立的小事件：同一個事件裡有兩組 queue_command 時，教育版只執行第一組（v1.17 本尊說話被吃掉）
             EV[`edu:do_clone${tag}`] = { queue_command: { command: spots.slice(0, n).map(pos => `summon ${info.id} ${pos} 0 0 ${cloneEv}`).concat(['particle minecraft:huge_explosion_emitter ~ ~1 ~']) } };
             preSeq.push({
@@ -484,10 +502,8 @@ function generate(project, VANILLA) {
               set_property: { 'edu:split': true },
               trigger: `edu:do_clone${tag}`
             });
-            // 分身出生時「不」執行這個事件本身（v1.14 這樣做，屬性寫入慢一拍，造成無限分身）。
-            // 改成在事件組好後，把「除了分身以外的效果」直接複製給分身，見下方 cloneBorn。
+            // 分身出生時執行 edu:clone_born（在「分身出生時」事件裡組好），不會再執行本尊的事件
             cloneBorn.push(cloneEv);
-            props()['edu:split'] = { type: 'bool', default: false, client_sync: false };
             break;
           }
           case 'shoot':
@@ -565,16 +581,25 @@ function generate(project, VANILLA) {
             comps['minecraft:inventory'] = { inventory_size: 16, container_type: 'horse' };
             comps['minecraft:is_chested'] = {};
             break;
+          case 'wait': break; // 已在上面切段
+          case 'dash': cmds.push(`scriptevent edu:dash ${v('s')}`); break; // 由腳本算方向、施加推力
           case 'say':
             // 頭上：用 /scriptevent 交給腳本，暫時把「這一隻」的名字改成這句話（名字會顯示在頭上）
             if (v('where') === 'head') cmds.push(`scriptevent edu:say ${v('text')}`);
             else {
               // 有影分身的事件：聊天欄文字前面標出是本尊還是分身說的
-              const who = hasClone ? (String(tag).endsWith('c') ? '【分身】' : '【本尊】') : '';
+              const who = cloneUsed ? (isCloneBorn ? '【分身】' : '【本尊】') : '';
               cmds.push(`say ${who}${v('text')}`);
             }
             break;
-          case 'lightning': cmds.push('summon lightning_bolt ~ ~ ~'); break;
+          case 'lightning': {
+            // 打在玩家身上：在玩家的位置執行召喚（@p＝離這隻生物最近的玩家）
+            const tg = v('tg');
+            cmds.push(tg === 'player' ? 'execute at @p run summon lightning_bolt ~ ~ ~'
+              : tg === 'all' ? 'execute at @a[r=16] run summon lightning_bolt ~ ~ ~'
+              : 'summon lightning_bolt ~ ~ ~');
+            break;
+          }
           case 'effect': cmds.push(`effect @a[r=${v('r')}] ${v('e')} ${v('s')} 1`); break;
           case 'summon': cmds.push(`summon ${v('m')} ~ ~1 ~`); break;
           case 'give': cmds.push(`give @p ${v('i')} 1`); break;
@@ -583,45 +608,63 @@ function generate(project, VANILLA) {
       });
       return { comps, cmds, extraAdd, hasReset, hasAngry, fuseGrp, preSeq, cloneBorn };
     };
-    const hasClone = !isStart && ev.actions.some(a => a.type === 'clone');
-    const whoOf = a => (hasClone && a.who) || 'both';
-    const A = build(ev.actions.filter(a => whoOf(a) !== 'clone'), String(i));
-    const { comps, cmds, extraAdd, hasReset, hasAngry, fuseGrp, preSeq, cloneBorn } = A;
+    if (isCloneBorn && !cloneUsed) return;
+    // 「等待 N 秒」把積木切成好幾段：第 0 段馬上做，之後每段由腳本計時後觸發下一段事件
+    const stages = [[]], waits = [];
+    for (const a of ev.actions) { if (a.type === 'wait') { waits.push(a); stages.push([]); } else stages[stages.length - 1].push(a); }
+    const ticksOf = k => Math.max(1, Math.round(pv(ACTIONS.wait, waits[k], 't') * 20));
+    const base = isCloneBorn ? 'edu:clone_born' : evName;
+    const stageName = k => `${base}_s${k}`;
+    const later = k => (k < stages.length - 1 ? [`scriptevent edu:later ${ticksOf(k)} ${stageName(k + 1)}`] : []);
+    const assemble = (part, gname, head) => {
+      const seq = [...(head || []), ...part.preSeq];
+      if (part.hasReset) { const r = { remove: { component_groups: [] } }; seq.push(r); resetSeqs.push(r); }
+      const add = [];
+      if (Object.keys(part.comps).length) { G[gname] = part.comps; add.push(gname); }
+      add.push(...part.extraAdd);
+      if (add.length) seq.push({ add: { component_groups: add } });
+      return seq;
+    };
+    // 同一個事件只能有一組指令（教育版只執行第一組），所以每段的指令＋排下一段的指令合成一組
+    const pushCmds = (seq, list) => { if (list.length) seq.push({ queue_command: { command: list } }); };
+    const noCloneInBorn = list => isCloneBorn ? list.filter(a => a.type !== 'clone') : list;
+    for (let k = 1; k < stages.length; k++) {
+      const P = build(noCloneInBorn(stages[k]), `${i}s${k}`);
+      const gname = `edu:g${i}s${k}_${ev.type}`;
+      const seqK = assemble(P, gname);
+      pushCmds(seqK, P.cmds.concat(later(k)));
+      EV[stageName(k)] = { sequence: seqK };
+      if (P.hasAngry) calmFor.push({ i: `${i}s${k}`, groups: [gname].concat(P.fuseGrp ? [P.fuseGrp] : []) });
+    }
+    // 「分身出生時」：組成 edu:clone_born 事件（分身不能再分身，所以這裡的影分身積木不作用）
+    if (isCloneBorn) {
+      const B = build(noCloneInBorn(stages[0]), String(i));
+      const born = assemble(B, grp, bornHead());
+      pushCmds(born, B.cmds.concat(later(0)));
+      EV['edu:clone_born'] = { sequence: born };
+      if (B.hasAngry) calmFor.push({ i, groups: [grp].concat(B.fuseGrp ? [B.fuseGrp] : []) });
+      return;
+    }
+    const A = build(stages[0], String(i));
+    const { comps, cmds, extraAdd, hasReset, hasAngry, fuseGrp, preSeq } = A;
 
     if (isStart) {
       Object.assign(C, comps);
-      if (cmds.length) {
+      const all = cmds.concat(later(0));
+      if (all.length) {
         const sp = EV['minecraft:entity_spawned'];
-        EV['minecraft:entity_spawned'] = sp ? { sequence: [sp, { queue_command: { command: cmds } }] } : { queue_command: { command: cmds } };
+        EV['minecraft:entity_spawned'] = sp ? { sequence: [sp, { queue_command: { command: all } }] } : { queue_command: { command: all } };
       }
       return;
     }
 
-    const seq = [...preSeq];
-    if (ev.type === 'day') seq.push({ set_property: { 'edu:phase': 1 } });
-    if (ev.type === 'night') seq.push({ set_property: { 'edu:phase': 2 } });
-    if (ev.type === 'player_near') seq.push({ set_property: { 'edu:near': true } });
-    if (hasReset) { const r = { remove: { component_groups: [] } }; seq.push(r); resetSeqs.push(r); }
-    const addList = [];
-    if (Object.keys(comps).length) { G[grp] = comps; addList.push(grp); }
-    addList.push(...extraAdd);
-    if (addList.length) seq.push({ add: { component_groups: addList } });
-    if (cmds.length) seq.push({ queue_command: { command: cmds } });
+    const head = [];
+    if (ev.type === 'day') head.push({ set_property: { 'edu:phase': 1 } });
+    if (ev.type === 'night') head.push({ set_property: { 'edu:phase': 2 } });
+    if (ev.type === 'player_near') head.push({ set_property: { 'edu:near': true } });
+    const seq = assemble(A, grp, head);
+    pushCmds(seq, cmds.concat(later(0)));
     EV[evName] = { sequence: seq };
-    if (cloneBorn.length) {
-      // 分身出生：標記已分身 → 原版出生流程 → 只套用「本尊和分身」「只有分身」的積木（不含影分身本身，所以分身不會再分身）
-      const B = build(ev.actions.filter(a => a.type !== 'clone' && whoOf(a) !== 'self'), i + 'c');
-      const born = [{ set_property: { 'edu:split': true } }];
-      if (EV['minecraft:entity_spawned'] && !String(JSON.stringify(EV['minecraft:entity_spawned'])).includes('edu:clone_born')) born.push({ trigger: 'minecraft:entity_spawned' });
-      if (B.hasReset) { const r = { remove: { component_groups: [] } }; born.push(r); resetSeqs.push(r); }
-      const bAdd = [];
-      if (Object.keys(B.comps).length) { G[`edu:g${i}c_${ev.type}`] = B.comps; bAdd.push(`edu:g${i}c_${ev.type}`); }
-      bAdd.push(...B.extraAdd);
-      if (bAdd.length) born.push({ add: { component_groups: bAdd } });
-      if (B.cmds.length) born.push({ queue_command: { command: B.cmds } });
-      for (const cb of cloneBorn) EV[cb] = { sequence: born };
-      if (B.hasAngry) calmFor.push({ i: i + 'c', groups: [`edu:g${i}c_${ev.type}`].concat(B.fuseGrp ? [B.fuseGrp] : []) });
-    }
     if (hasAngry) calmFor.push({ i, groups: [grp].concat(fuseGrp ? [fuseGrp] : []) });
 
     switch (ev.type) {
@@ -695,8 +738,17 @@ function generate(project, VANILLA) {
     }
   });
 
+  if (cloneUsed) {
+    props()['edu:split'] = { type: 'bool', default: false, client_sync: false };
+    props()['edu:clone'] = { type: 'bool', default: false, client_sync: false };
+    if (!EV['edu:clone_born']) EV['edu:clone_born'] = { sequence: bornHead() };
+    // 分身不執行本尊的任何事件（被攻擊後、天黑時…）：在每個事件最外層加上「不是分身」的條件
+    for (const name of Object.keys(EV)) {
+      if (/^edu:e\d+_/.test(name)) EV[name] = { filters: { test: 'bool_property', domain: 'edu:clone', value: false }, sequence: [EV[name]] };
+    }
+  }
   // 頭上說話：名字預設只在準心對準時顯示，打開 always_show 讓每一隻頭上的字同時出現
-  if (needsScript(project)) everywhere('minecraft:nameable', n => { n.always_show = true; }, {});
+  if (needsNameAlways(project)) everywhere('minecraft:nameable', n => { n.always_show = true; }, {});
   if (phaseUsed) {
     props()['edu:phase'] = { type: 'int', range: [0, 2], default: 0, client_sync: false };
     const dayEv = Object.keys(EV).find(k => /^edu:e\d+_day$/.test(k)) || 'edu:set_day';
@@ -734,6 +786,12 @@ function lint(project, VANILLA) {
   const info = VANILLA ? mobInfo(VANILLA, project.mob) : null;
   if (!evs.length) out.push({ lv: 'info', t: '從左邊選一個「事件」開始，再把「動作」放進去。' });
   evs.forEach((e) => { if (!e.actions.length) out.push({ lv: 'warn', t: `「${evLabelText(e)}」裡面還沒有動作。` }); });
+  if (has('clone_born') && !evs.some(e => e.type !== 'start' && e.type !== 'clone_born' && e.actions.some(a => a.type === 'clone')))
+    out.push({ lv: 'bad', t: '有「分身出生時」，但沒有任何事件用到「影分身之術」，分身不會出現。' });
+  if (evs.some(e => e.type === 'clone_born' && e.actions.some(a => a.type === 'clone')))
+    out.push({ lv: 'warn', t: '分身不能再分身，「分身出生時」裡的「影分身之術」不會作用。' });
+  if (evs.some(e => e.type !== 'clone_born' && e.actions.some(a => a.type === 'clone')) && !has('clone_born'))
+    out.push({ lv: 'info', t: '分身只會執行「分身出生時」底下的積木。想讓分身說話、射擊，請加上「分身出生時」事件。' });
   if (has('friend_angry') && !allActs.includes('angry_attack'))
     out.push({ lv: 'bad', t: '「附近同伴生氣時」永遠不會觸發：沒有任何事件讓牠「生氣」。請在「被攻擊後」放「生氣並攻擊玩家」。' });
   const dmg = evs.find(e => e.type === 'damaged');
@@ -758,7 +816,8 @@ function lint(project, VANILLA) {
   const items = evs.filter(e => e.type === 'interact').map(e => (e.p && e.p.item) || 'stick');
   if (new Set(items).size !== items.length) out.push({ lv: 'warn', t: '有兩個「玩家拿著…點牠時」用了同一個物品，只有第一個會觸發。' });
   if (allActs.includes('panic') && allActs.some(a => HOSTILE.includes(a))) out.push({ lv: 'warn', t: '同時用了「被打會逃跑」和攻擊類積木，牠可能一直在逃跑跟攻擊之間切換。' });
-  if (needsScript(project)) out.push({ lv: 'info', t: '「說…顯示在自己頭上」用到腳本功能。如果頭上沒有出現文字，可能是教育版不支援，請改回「聊天欄」並回報給老師。' });
+  evs.forEach(e => { const a = e.actions; if (a.length && a[a.length - 1].type === 'wait') out.push({ lv: 'warn', t: `「${evLabelText(e)}」最後一個積木是「等待」，後面沒有積木，等待沒有作用。` }); });
+  evs.forEach(e => { const a = e.actions; for (let k = 0; k < a.length - 1; k++) if (a[k].type === 'wait' && a[k + 1].type === 'wait') { out.push({ lv: 'info', t: `「${evLabelText(e)}」裡有兩個「等待」連在一起，時間會相加。` }); break; } });
   if (allActs.includes('carry_chest')) out.push({ lv: 'info', t: '「背箱子」比較可能只對驢子、騾子、羊駝這類原本就能背箱子的生物有效。' });
   const betaUsed = mob.beta || evs.some(e => isBetaBlock(e.type, true) || e.actions.some(a => isBetaBlock(a.type)));
   if (betaUsed) out.push({ lv: 'info', t: '你用了「測試中」的生物或積木，可能會失敗。進遊戲試完後，請到「回報」分頁把結果告訴老師。' });
@@ -770,7 +829,7 @@ function requirements(project) {
   const acts = project.events.flatMap(e => e.actions.map(a => a.type));
   const hostile = acts.some(a => HOSTILE.includes(a));
   const brk = project.events.some(e => e.actions.some(a => (a.type === 'explode_near' && (a.p && a.p.brk !== undefined ? a.p.brk : true)) || a.type === 'explode_now'));
-  const cmd = acts.some(a => ACTIONS[a] && ACTIONS[a].cat === 'cmd') || acts.includes('pet') || acts.includes('clone');
+  const cmd = acts.some(a => ACTIONS[a] && ACTIONS[a].cat === 'cmd') || acts.includes('pet') || acts.includes('clone') || acts.includes('wait') || acts.includes('dash');
   const r = [];
   if (hostile) {
     r.push({ k: '個人遊戲模式', v: '生存', why: '創造模式的玩家不會被生物當成目標，牠不會追你、射你、也不會爆炸。', short: '生存模式' });
@@ -797,12 +856,40 @@ function pvLabel(def, blk, k) {
 
 // 有任何「說…顯示在頭上」就需要腳本
 function needsScript(project) {
+  return project.events.some(e => e.actions.some(a => (a.type === 'say' && a.p && a.p.where === 'head') || a.type === 'wait' || a.type === 'dash'));
+}
+function needsNameAlways(project) {
   return project.events.some(e => e.actions.some(a => a.type === 'say' && a.p && a.p.where === 'head'));
 }
-const SCRIPT_MAIN = `// Adam麥塊生物行為工坊：讓生物說的話顯示在自己頭上（暫時改名字，3 秒後改回來）
+const SCRIPT_MAIN = `// Adam麥塊生物行為工坊：頭上說話（暫時改名字，3 秒後改回來）＋「等待 N 秒」計時＋衝向玩家
 import { system } from "@minecraft/server";
 const active = new Map();
 system.afterEvents.scriptEventReceive.subscribe((ev) => {
+  // 「等待 N 秒」：過了 N 刻（20 刻＝1 秒）再觸發這隻生物的下一段事件
+  if (ev.id === "edu:later") {
+    const e0 = ev.sourceEntity;
+    // 不用正規表示式（反斜線在這段文字裡會被吃掉，v1.25 因此壞掉），直接用空白切開
+    const parts = String(ev.message).trim().split(" ").filter(Boolean);
+    const ticks = Math.max(1, parseInt(parts[0], 10) || 20);
+    const name = parts[1];
+    if (!e0 || !name) return;
+    system.runTimeout(() => { try { e0.triggerEvent(name); } catch (err) {} }, ticks);
+    return;
+  }
+  // 衝向最近的玩家：算出水平方向與距離，給一股往玩家的推力（力道 1 約剛好衝到身邊）
+  if (ev.id === "edu:dash") {
+    const e1 = ev.sourceEntity;
+    if (!e1) return;
+    const power = Math.min(3, Math.max(0.5, parseFloat(ev.message) || 1));
+    let p;
+    try { p = e1.dimension.getPlayers({ location: e1.location, closest: 1, maxDistance: 32 })[0]; } catch (err) {}
+    if (!p) return;
+    const dx = p.location.x - e1.location.x, dz = p.location.z - e1.location.z;
+    const dist = Math.sqrt(dx * dx + dz * dz) || 1;
+    const speed = Math.min(1.5, Math.max(0.25, dist / 6)) * power;
+    try { e1.applyImpulse({ x: dx / dist * speed, y: 0.35, z: dz / dist * speed }); } catch (err) {}
+    return;
+  }
   if (ev.id !== "edu:say") return;
   const e = ev.sourceEntity;
   if (!e) return;
@@ -881,7 +968,7 @@ if (typeof module !== 'undefined') module.exports = { stripJsonComments, VANILLA
 const $ = s => document.querySelector(s);
 const uid = () => (crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==='x'?r:(r&3|8)).toString(16)}));
 const nid = () => Math.random().toString(36).slice(2,9);
-const CAT = { ev:['事件','var(--ev)'], fight:['戰鬥','var(--fight)'], body:['身體','var(--body)'], friend:['朋友','var(--friend)'], cmd:['指令','var(--cmd)'] };
+const CAT = { ev:['事件','var(--ev)'], fight:['戰鬥','var(--fight)'], body:['身體','var(--body)'], friend:['朋友','var(--friend)'], cmd:['指令','var(--cmd)'], flow:['順序','var(--flow)'] };
 const BETA = '<span class="beta">測試中</span>';
 
 const TEMPLATES = {
@@ -918,7 +1005,9 @@ const TEMPLATES = {
     ['start',{},[['no_ai']]]
   ]},
   ninja_chicken: { title:'影分身火球雞', mob:'chicken', name:'影分身火球雞', events:[
-    ['damaged',{},[['clone',{n:4}],['say',{text:'影分身之術！',where:'head'},'self'],['say',{text:'豪火球之術！',where:'head'},'clone'],['delayed_shoot',{t:1,pj:'minecraft:fireball'},'clone']]]
+    // 2026/10/24 老師在教育版實測，特效與時間順序都正確的組合
+    ['damaged',{},[['say',{text:'影分身之術！',where:'head'}],['clone',{n:4}],['wait',{t:5}],['say',{text:'雷切！',where:'chat'}],['dash',{s:1}],['wait',{t:2}],['lightning',{tg:'player'}]]],
+    ['clone_born',{},[['wait',{t:2}],['say',{text:'豪火球之術！',where:'head'}],['wait',{t:1}],['shoot',{pj:'minecraft:fireball'}]]]
   ]},
   blank: { title:'空白專案', mob:'cow', name:'我的生物', events:[] }
 };
@@ -934,6 +1023,25 @@ try { const raw = localStorage.getItem('mob-workshop-v1'); if (raw) S = JSON.par
 if (!S || !Array.isArray(S.events)) S = fromTemplate('boom_cow');
 if (!MOBS[S.mob]) S.mob = 'cow';
 if (!S.suuid) S.suuid = uid();
+// v1.23 移轉：舊版「只有分身／本尊和分身」積木 → 搬到「分身出生時」事件
+(function migrateWho(){
+  const moved = [];
+  for (const e of S.events) {
+    if (!e.actions.some(a => a.who)) continue;
+    const keep = [];
+    for (const a of e.actions) {
+      const w = a.who; delete a.who;
+      if (w === 'clone') moved.push(a);
+      else { keep.push(a); if (w === 'both' && a.type !== 'clone') moved.push(Object.assign({}, JSON.parse(JSON.stringify(a)), { id: nid() })); }
+    }
+    e.actions = keep;
+  }
+  if (moved.length) {
+    let cb = S.events.find(e => e.type === 'clone_born');
+    if (!cb) { cb = { id: nid(), type: 'clone_born', p: {}, actions: [] }; S.events.push(cb); }
+    cb.actions.push(...moved);
+  }
+})();
 S.events = S.events.filter(e => EVENTS[e.type]).map(e => (e.actions = e.actions.filter(a => ACTIONS[a.type]), e));
 if (!S.sel && S.events[0]) S.sel = S.events[0].id;
 
@@ -958,8 +1066,8 @@ function labelPlain(def){ return def.label.map(s => s.startsWith('#') ? (def.p.f
 function renderPalette(){
   let h = `<div class="pgroup"><h3><span class="dot" style="background:var(--ev)"></span>事件（什麼時候）</h3><div class="plist">` +
     Object.entries(EVENTS).map(([k,d]) => `<button class="pitem ev" draggable="true" data-add="ev:${k}" type="button">${labelPlain(d)}${d.beta?BETA:''}</button>`).join('') + `</div></div>`;
-  for (const cat of ['fight','body','friend','cmd']) {
-    const note = cat==='fight' ? '<p class="pnote">測試要用生存模式＋簡單以上難度</p>' : cat==='cmd' ? '<p class="pnote">世界要開啟作弊（允許指令）</p>' : cat==='friend' ? '<p class="pnote">大多只能放在「一開始就」</p>' : '';
+  for (const cat of ['flow','fight','body','friend','cmd']) {
+    const note = cat==='flow' ? '<p class="pnote">讓招式有先後順序：等待後才做下面的積木</p>' : cat==='fight' ? '<p class="pnote">測試要用生存模式＋簡單以上難度</p>' : cat==='cmd' ? '<p class="pnote">世界要開啟作弊（允許指令）</p>' : cat==='friend' ? '<p class="pnote">大多只能放在「一開始就」</p>' : '';
     h += `<div class="pgroup"><h3><span class="dot" style="background:${CAT[cat][1]}"></span>${CAT[cat][0]}（做什麼）</h3>${note}<div class="plist">` +
       Object.entries(ACTIONS).filter(([,d])=>d.cat===cat).map(([k,d]) => `<button class="pitem ${cat}" draggable="true" data-add="act:${k}" type="button">${labelPlain(d)}${d.beta?BETA:''}${d.startOnly?'<span class="beta">只限一開始</span>':''}</button>`).join('') + `</div></div>`;
   }
@@ -1012,7 +1120,7 @@ function renderStacks(){
     const acts = ev.actions.map((a, j) => {
       const ad = ACTIONS[a.type];
       const dim = (ad.startOnly && ev.type!=='start') || (ad.notStart && ev.type==='start');
-      return `<div class="blk ${ad.cat}${dim?' dim':''}" draggable="true" data-mv="${ev.id}:${a.id}">${hasClone && a.type !== 'clone' ? whoSelect(a, ev.id+'.'+a.id) : ''}${field(ad, a, ev.id+'.'+a.id)}${ad.beta?BETA:''}
+      return `<div class="blk ${ad.cat}${dim?' dim':''}" draggable="true" data-mv="${ev.id}:${a.id}">${field(ad, a, ev.id+'.'+a.id)}${ad.beta?BETA:''}
         <span class="tools"><button type="button" data-act="up" data-e="${ev.id}" data-a="${a.id}" aria-label="上移" ${j===0?'disabled':''}>↑</button><button type="button" data-act="down" data-e="${ev.id}" data-a="${a.id}" aria-label="下移">↓</button><button type="button" data-act="del" data-e="${ev.id}" data-a="${a.id}" aria-label="刪除">✕</button></span></div>`;
     }).join('');
     return `<div class="stack${ev.id===S.sel?' sel':''}" data-stack="${ev.id}">
@@ -1043,7 +1151,7 @@ function whoSelect(a, owner){
   const v = a.who || 'both';
   return `<select id="f-${owner}-who" data-o="${owner}" data-k="__who" aria-label="誰要做">${WHO.map(([k,l])=>`<option value="${k}"${k===v?' selected':''}>${l}</option>`).join('')}</select>`;
 }
-function whoText(e, a){ return (e.type !== 'start' && a.type !== 'clone' && e.actions.some(x => x.type === 'clone')) ? `【${(WHO.find(w => w[0] === (a.who || 'both')) || WHO[0])[1]}】` : ''; }
+function whoText(e, a){ return ''; } // v1.23 起改用「分身出生時」事件，不再有本尊／分身選單
 function onField(e){
   const el = e.target; if (!el.dataset || !el.dataset.o) return;
   const [eid, aid] = el.dataset.o.split('.');
